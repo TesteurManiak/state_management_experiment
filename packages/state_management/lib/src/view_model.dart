@@ -49,25 +49,18 @@ abstract class ViewModel<State> extends ChangeNotifier
 /// This class is used to listen to changes in the view model and notify
 /// listeners when the selected state changes.
 /// This class is used internally by [ViewModel.select].
-class _SelectorNotifier<T> extends ChangeNotifier
-    with AutoDisposeNotifierMixin
-    implements ValueListenable<T> {
-  _SelectorNotifier(this.getValue) : _value = getValue();
+class _SelectorNotifier<T> extends ValueNotifier<T>
+    with AutoDisposeNotifierMixin {
+  _SelectorNotifier(this.getValue) : super(getValue());
 
   final T Function() getValue;
-  T _value;
-
-  @override
-  T get value => _value;
 
   VoidCallback? onAddListener;
   VoidCallback? onRemoveListener;
 
   void notify() {
     final current = getValue();
-    if (current == _value) return;
-    _value = current;
-    notifyListeners();
+    value = current;
   }
 
   @override
