@@ -10,7 +10,7 @@ import 'mixins/hook_notifier.dart';
 ///
 /// ## Example
 /// ```dart
-/// class CounterPageViewModel extends ViewModel {
+/// class CounterPageViewModel extends ViewModel<int> {
 ///   CounterPageViewModel() : super(0);
 ///
 ///   void increment() => state++;
@@ -35,8 +35,8 @@ abstract class ViewModel<State> extends ChangeNotifier
   @override
   State get value => _state;
 
-  /// Creates an auto-disposed [SelectorNotifier] that listens to changes in the
-  /// view model to observe a subset of the state.
+  /// Creates an auto-disposed [_SelectorNotifier] that listens to changes in
+  /// the view model to observe a subset of the state.
   ValueListenable<S> select<S>(S Function(State) selector) {
     final notifier = useNotifier(_SelectorNotifier(() => selector(state)));
     notifier.onAddListener = () => addListener(notifier.notify);
@@ -64,13 +64,13 @@ class _SelectorNotifier<T> extends ValueNotifier<T>
   }
 
   @override
-  void addListener(final VoidCallback listener) {
+  void addListener(VoidCallback listener) {
     onAddListener?.call();
     super.addListener(listener);
   }
 
   @override
-  void removeListener(final VoidCallback listener) {
+  void removeListener(VoidCallback listener) {
     onRemoveListener?.call();
     super.removeListener(listener);
   }
