@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:state_management/state_management.dart';
+import 'package:state_management_experiment/core/mixins/hook.dart';
 
 import '../../../theme/ui/widgets/theme_switcher.dart';
 import '../view_models/counter_page_view_model.dart';
@@ -69,11 +69,11 @@ class _Buttons extends StatelessWidget {
       spacing: 8,
       children: [
         IconButton(
-          onPressed: () => viewModel.decrement(),
+          onPressed: viewModel.decrement,
           icon: Icon(Icons.remove),
         ),
         IconButton(
-          onPressed: () => viewModel.increment(),
+          onPressed: viewModel.increment,
           icon: Icon(Icons.add),
         ),
       ],
