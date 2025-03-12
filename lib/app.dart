@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'features/counter/ui/pages/counter_page.dart';
+import 'features/home/ui/pages/home_page.dart';
 import 'features/theme/ui/view_models/theme_mode_view_model.dart';
 
 class MainApp extends StatelessWidget {
@@ -15,7 +15,7 @@ class MainApp extends StatelessWidget {
           themeMode: themeMode,
           theme: ThemeData.light(),
           darkTheme: ThemeData.dark(),
-          home: CounterPage(),
+          home: HomePage(),
         );
       },
     );
