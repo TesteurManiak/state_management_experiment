@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:state_management_experiment/features/tasks/ui/pages/tasks_page.dart';
 
 import '../../../counter/ui/pages/counter_page.dart';
 import '../../../dual_counters/ui/pages/dual_counters_page.dart';
@@ -18,14 +19,12 @@ class HomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           spacing: 8,
           children: [
-            _NavigationButton(
-              label: 'Counter',
-              builder: (_) => CounterPage(),
-            ),
+            _NavigationButton(label: 'Counter', builder: (_) => CounterPage()),
             _NavigationButton(
               label: 'Dual Counters',
               builder: (_) => DualCountersPage(),
             ),
+            _NavigationButton(label: 'Tasks', builder: (_) => TasksPage()),
           ],
         ),
       ),
