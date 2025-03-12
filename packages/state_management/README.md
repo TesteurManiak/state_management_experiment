@@ -2,6 +2,80 @@
 
 An experimentation in implementing state management concepts in Flutter without using any external packages.
 
+## State Management Concepts
+
+### 1. Create a State
+
+```dart
+@freezed
+abstract class CounterState with _$CounterState {
+  const factory CounterState({
+    @Default(0) int counter,
+  }) = _CounterState;
+}
+```
+
+### 2. Create a `ViewModel`
+
+```dart
+class CounterPageViewModel extends ViewModel<CounterState> {
+  CounterPageViewModel() : super(const CounterState());
+
+  void increment() => state = state.copyWith(counter: state.counter + 1);
+  void decrement() => state = state.copyWith(counter: state.counter - 1);
+}
+```
+
+### 3. Use it in your Widget
+
+```dart
+class CounterPage extends StatefulWidget { /* ... */ }
+
+class _CounterPageState extends State<CounterPage> {
+  final viewModel = CounterPageViewModel();
+
+  @override
+  void dispose() {
+    viewModel.dispose();
+    super.dispose();
+  }
+
+  // ...
+}
+```
+
+###### Rebuild the UI when the state changes
+
+```dart
+@override
+Widget build(BuildContext context) {
+    return ListenableBuilder(
+        listenable: viewModel,
+        builder: (context, _) {
+            final counter = viewModel.state.counter;
+            // ...
+        },
+    );
+}
+```
+
+###### (Optimized) Rebuild the UI only when part of the state changes
+
+```dart
+@override
+Widget build(BuildContext context) {
+    final counterNotifier = viewModel.select((state) => state.counter);
+    return ValueListenableBuilder(
+        valueListenable: counterNotifier,
+        builder: (context, counter, _) {
+            // ...
+        },
+    );
+}
+```
+
+## Credits
+
 This package takes inspirations and implement similar concepts from the following:
 
 - [provider](https://pub.dev/packages/provider)
