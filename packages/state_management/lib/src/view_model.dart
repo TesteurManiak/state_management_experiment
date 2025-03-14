@@ -4,9 +4,6 @@ import 'mixins/hook_notifier.dart';
 
 /// Base [ValueNotifier] class used to define view models.
 ///
-/// You should **not** use the `value` setter directly with this class. Instead,
-/// you should use the `state` setter from inside the view model.
-///
 /// ## Example
 /// ```dart
 /// class CounterPageViewModel extends ViewModel<int> {
