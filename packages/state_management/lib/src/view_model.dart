@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
-
-import 'mixins/hook_notifier.dart';
+import 'package:state_management/src/mixins/auto_dispose_notifier.dart';
+import 'package:state_management/src/mixins/hook_notifier.dart';
 
 /// Base [ValueNotifier] class used to define view models.
 ///
@@ -31,42 +31,30 @@ abstract class ViewModel<State> extends ChangeNotifier
   @override
   State get value => _state;
 
-  /// Used to handle the disposal of sub notifiers created by [select].
-  final _selectorMap = <Selector<State, Object?>, _SelectorNotifier>{};
-
-  /// Creates a [_SelectorNotifier] that listens to changes in
-  /// the view model to observe a subset of the state.
-  ValueListenable<S> select<S>(Selector<State, S> selector) {
-    if (_selectorMap[selector] case final notifier? when !notifier.disposed) {
-      notifier.dispose();
-    }
-
+  /// Creates a [_SelectorNotifier] that listens to changes in the view model
+  /// to observe a subset of the state.
+  ValueListenable<S> select<S>(SelectCallback<State, S> selector) {
     final notifier = useNotifier(_SelectorNotifier(() => selector(state)));
 
     addListener(notifier.notify);
-    notifier.onDispose = () {
-      removeListener(notifier.notify);
-      _selectorMap.remove(selector);
-    };
+    notifier.onDispose = () => removeListener(notifier.notify);
 
-    _selectorMap[selector] = notifier;
     return notifier;
   }
 }
 
-typedef Selector<State, S> = S Function(State state);
+typedef SelectCallback<State, S> = S Function(State state);
 
 /// A representation of a [ViewModel]'s subset of the state.
 /// This class is used to listen to changes in the view model and notify
 /// listeners when the selected state changes.
 /// This class is used internally by [ViewModel.select].
-class _SelectorNotifier<T> extends ValueNotifier<T> {
+class _SelectorNotifier<T> extends ValueNotifier<T> with AutoDisposeNotifier {
   _SelectorNotifier(this.getValue) : super(getValue());
 
   final T Function() getValue;
 
   VoidCallback? onDispose;
-  bool disposed = false;
 
   void notify() {
     final current = getValue();
@@ -78,6 +66,5 @@ class _SelectorNotifier<T> extends ValueNotifier<T> {
     if (disposed) return;
     onDispose?.call();
     super.dispose();
-    disposed = true;
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:state_management_experiment/core/mixins/hook.dart';
-import 'package:state_management_experiment/features/counter/ui/widgets/counter.dart';
 
+import '../../../counter/ui/widgets/counter.dart';
 import '../view_models/dual_counters_view_model.dart';
 
 class DualCountersPage extends StatefulWidget {

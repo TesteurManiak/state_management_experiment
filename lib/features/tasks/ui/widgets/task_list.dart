@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:state_management/state_management.dart';
 import 'package:state_management_experiment/core/mixins/hook.dart';
 
 import '../../domain/entities/task.dart';
@@ -27,25 +28,26 @@ class _TaskListState extends State<TaskList> with HookMixin {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: ValueListenableBuilder(
-        valueListenable: viewModel.select((state) => state.isLoading),
-        builder: (context, isLoading, _) {
+      child: Selector(
+        viewModel: viewModel,
+        select: (state) => state.isLoading,
+        builder: (context, isLoading) {
           return isLoading
               ? AppLoader()
               : TabBarView(
                   children: <Widget>[
-                    ValueListenableBuilder(
-                      valueListenable:
-                          viewModel.select((state) => state.todoTasks),
-                      builder: (_, value, __) => _TaskListDetail(
+                    Selector(
+                      viewModel: viewModel,
+                      select: (state) => state.todoTasks,
+                      builder: (_, value) => _TaskListDetail(
                         taskList: value,
                         viewModel: viewModel,
                       ),
                     ),
-                    ValueListenableBuilder(
-                      valueListenable:
-                          viewModel.select((state) => state.archivedTasks),
-                      builder: (_, value, __) => _TaskListDetail(
+                    Selector(
+                      viewModel: viewModel,
+                      select: (state) => state.archivedTasks,
+                      builder: (_, value) => _TaskListDetail(
                         taskList: value,
                         viewModel: viewModel,
                       ),
