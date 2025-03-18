@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:state_management/state_management.dart';
 
+import '../../../../core/view_model_locator.dart';
+
 const _kDefaultThemeMode = ThemeMode.system;
 
 class ThemeModeViewModel extends ViewModel<ThemeMode> {
@@ -20,4 +22,6 @@ class ThemeModeViewModel extends ViewModel<ThemeMode> {
   }
 }
 
-final themeViewModel = Locator(() => ThemeModeViewModel());
+final themeViewModel = ViewModelLocator<ThemeMode, ThemeModeViewModel>(
+  () => ThemeModeViewModel(),
+);
