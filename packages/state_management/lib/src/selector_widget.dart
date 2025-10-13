@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide State;
 import 'package:state_management/src/view_model.dart';
 
 typedef SelectWidgetBuilder<S> = Widget Function(BuildContext, S);
