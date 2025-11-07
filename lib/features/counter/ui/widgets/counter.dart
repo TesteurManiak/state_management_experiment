@@ -16,7 +16,7 @@ class Counter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.watch(counterListenable);
+    final count = context.watch(counterListenable);
 
     return Center(
       child: Column(
@@ -25,7 +25,7 @@ class Counter extends StatelessWidget {
         children: [
           Text('You have pushed the button this many times:'),
           Text(
-            '${counterListenable.value}',
+            '$count',
             style: Theme.of(context).textTheme.headlineMedium,
           ),
           Row(
