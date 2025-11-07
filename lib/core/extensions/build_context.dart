@@ -5,12 +5,15 @@ extension WatchListenableExtension on BuildContext {
   /// Watches a [ValueListenable] and rebuilds the widget when it changes.
   T watch<T>(ValueListenable<T> listenable) {
     void watchListener() {
-      if (this case final Element element
-          when element.mounted && !element.dirty) {
-        if (element.dirty) return;
-        // Trigger widget rebuild
-        element.markNeedsBuild();
+      final element = this;
+      if (element is! Element || !element.mounted || element.dirty) {
+        // If the element is no longer mounted, remove the listener
+        listenable.removeListener(watchListener);
+        return;
       }
+
+      // Trigger a rebuild
+      element.markNeedsBuild();
     }
 
     listenable.addListener(watchListener);
