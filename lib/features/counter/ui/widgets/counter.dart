@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:state_management_experiment/core/extensions/build_context.dart';
 
 class Counter extends StatelessWidget {
   const Counter({
@@ -15,20 +16,17 @@ class Counter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.watch(counterListenable);
+
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
           Text('You have pushed the button this many times:'),
-          ValueListenableBuilder<int>(
-            valueListenable: counterListenable,
-            builder: (context, count, _) {
-              return Text(
-                '$count',
-                style: Theme.of(context).textTheme.headlineMedium,
-              );
-            },
+          Text(
+            '${counterListenable.value}',
+            style: Theme.of(context).textTheme.headlineMedium,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
