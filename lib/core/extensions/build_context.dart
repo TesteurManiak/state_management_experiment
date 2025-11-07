@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 extension WatchListenableExtension on BuildContext {
-  /// Watches a [Listenable] and rebuilds the widget when it changes.
+  /// Watches a [ValueListenable] and rebuilds the widget when it changes.
   T watch<T>(ValueListenable<T> listenable) {
     void watchListener() {
       if (this case final Element element
@@ -13,7 +13,6 @@ extension WatchListenableExtension on BuildContext {
       }
     }
 
-    // Remove previous listener to avoid multiple registrations
     listenable.addListener(watchListener);
 
     return listenable.value;
