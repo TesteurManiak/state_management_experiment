@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:state_management_experiment/core/extensions/build_context.dart';
+import 'package:state_management/state_management.dart';
 
 class Counter extends StatelessWidget {
   const Counter({
@@ -24,23 +24,14 @@ class Counter extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text('You have pushed the button this many times:'),
-          Text(
-            '$count',
-            style: Theme.of(context).textTheme.headlineMedium,
-          ),
+          Text('$count', style: Theme.of(context).textTheme.headlineMedium),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             spacing: 8,
             children: [
-              IconButton(
-                onPressed: onDecrement,
-                icon: Icon(Icons.remove),
-              ),
-              IconButton(
-                onPressed: onIncrement,
-                icon: Icon(Icons.add),
-              ),
+              IconButton(onPressed: onDecrement, icon: Icon(Icons.remove)),
+              IconButton(onPressed: onIncrement, icon: Icon(Icons.add)),
             ],
           ),
         ],
