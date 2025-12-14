@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:state_management/state_management.dart';
 import 'package:state_management_experiment/core/mixins/hook.dart';
 
 import '../../domain/entities/task.dart';
@@ -26,45 +25,41 @@ class _TaskListState extends State<TaskList> with HookMixin {
 
   @override
   Widget build(BuildContext context) {
+    final isLoading = viewModel.select((s) => s.isLoading).watch(context);
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: Selector(
-        viewModel: viewModel,
-        select: (state) => state.isLoading,
-        builder: (context, isLoading) {
-          return isLoading
-              ? AppLoader()
-              : TabBarView(
-                  children: <Widget>[
-                    Selector(
+      child: isLoading
+          ? AppLoader()
+          : TabBarView(
+              children: <Widget>[
+                Builder(
+                  builder: (context) {
+                    return _TaskListDetail(
+                      taskList: viewModel
+                          .select((s) => s.todoTasks)
+                          .watch(context),
                       viewModel: viewModel,
-                      select: (state) => state.todoTasks,
-                      builder: (_, value) => _TaskListDetail(
-                        taskList: value,
-                        viewModel: viewModel,
-                      ),
-                    ),
-                    Selector(
+                    );
+                  },
+                ),
+                Builder(
+                  builder: (context) {
+                    return _TaskListDetail(
+                      taskList: viewModel
+                          .select((s) => s.archivedTasks)
+                          .watch(context),
                       viewModel: viewModel,
-                      select: (state) => state.archivedTasks,
-                      builder: (_, value) => _TaskListDetail(
-                        taskList: value,
-                        viewModel: viewModel,
-                      ),
-                    ),
-                  ],
-                );
-        },
-      ),
+                    );
+                  },
+                ),
+              ],
+            ),
     );
   }
 }
 
 class _TaskListDetail extends StatelessWidget {
-  const _TaskListDetail({
-    required this.taskList,
-    required this.viewModel,
-  });
+  const _TaskListDetail({required this.taskList, required this.viewModel});
 
   final List<Task> taskList;
   final TasksViewModel viewModel;
@@ -74,20 +69,14 @@ class _TaskListDetail extends StatelessWidget {
     return ListView(
       children: [
         for (final task in taskList)
-          _TaskItem(
-            task: task,
-            viewModel: viewModel,
-          )
+          _TaskItem(task: task, viewModel: viewModel),
       ],
     );
   }
 }
 
 class _TaskItem extends StatelessWidget {
-  const _TaskItem({
-    required this.task,
-    required this.viewModel,
-  });
+  const _TaskItem({required this.task, required this.viewModel});
 
   final Task task;
   final TasksViewModel viewModel;
@@ -101,7 +90,7 @@ class _TaskItem extends StatelessWidget {
         IconButton(
           onPressed: () => viewModel.toggleTaskStatus(task),
           icon: Icon(task.isDone ? Icons.hourglass_empty : Icons.done),
-        )
+        ),
       ],
     );
   }
