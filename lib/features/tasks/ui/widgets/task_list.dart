@@ -26,32 +26,17 @@ class _TaskListState extends State<TaskList> with HookMixin {
   @override
   Widget build(BuildContext context) {
     final isLoading = viewModel.select((s) => s.isLoading).watch(context);
+    final todo = viewModel.select((s) => s.todoTasks).watch(context);
+    final archived = viewModel.select((s) => s.archivedTasks).watch(context);
+
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: isLoading
           ? AppLoader()
           : TabBarView(
               children: <Widget>[
-                Builder(
-                  builder: (context) {
-                    return _TaskListDetail(
-                      taskList: viewModel
-                          .select((s) => s.todoTasks)
-                          .watch(context),
-                      viewModel: viewModel,
-                    );
-                  },
-                ),
-                Builder(
-                  builder: (context) {
-                    return _TaskListDetail(
-                      taskList: viewModel
-                          .select((s) => s.archivedTasks)
-                          .watch(context),
-                      viewModel: viewModel,
-                    );
-                  },
-                ),
+                _TaskListDetail(taskList: todo, viewModel: viewModel),
+                _TaskListDetail(taskList: archived, viewModel: viewModel),
               ],
             ),
     );
