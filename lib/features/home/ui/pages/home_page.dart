@@ -10,13 +10,11 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Home'),
-      ),
+      appBar: AppBar(title: Text('Home')),
       body: Center(
         child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: .min,
+          mainAxisAlignment: .center,
           spacing: 8,
           children: [
             _NavigationButton(label: 'Counter', builder: (_) => CounterPage()),
@@ -33,10 +31,7 @@ class HomePage extends StatelessWidget {
 }
 
 class _NavigationButton<T extends Object?> extends StatelessWidget {
-  const _NavigationButton({
-    required this.label,
-    required this.builder,
-  });
+  const _NavigationButton({required this.label, required this.builder});
 
   final String label;
   final WidgetBuilder builder;

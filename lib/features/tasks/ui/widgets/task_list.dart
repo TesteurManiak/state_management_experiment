@@ -22,7 +22,7 @@ class _TaskListState extends State<TaskList> with HookMixin {
     final archived = viewModel.select((s) => s.archivedTasks).watch(context);
 
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const .all(16.0),
       child: isLoading
           ? AppLoader()
           : TabBarView(
