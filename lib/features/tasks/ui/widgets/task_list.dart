@@ -16,14 +16,6 @@ class _TaskListState extends State<TaskList> with HookMixin {
   late final viewModel = useNotifier(TasksViewModel());
 
   @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      viewModel.fetchTasks();
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     final isLoading = viewModel.select((s) => s.isLoading).watch(context);
     final todo = viewModel.select((s) => s.todoTasks).watch(context);

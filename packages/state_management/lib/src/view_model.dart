@@ -18,7 +18,9 @@ import 'mixins/watch_notifier.dart';
 abstract class ViewModel<State> extends ChangeNotifier
     with HookNotifierMixin
     implements ValueListenable<State> {
-  ViewModel(this._state);
+  ViewModel(this._state) {
+    init();
+  }
 
   State _state;
   State get state => _state;
@@ -29,6 +31,11 @@ abstract class ViewModel<State> extends ChangeNotifier
     _state = value;
     notifyListeners();
   }
+
+  /// Initialization method called after the view model is created.
+  /// Override this method to perform any setup required for the view model.
+  @protected
+  void init() {}
 
   @override
   State get value => _state;

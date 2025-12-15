@@ -4,11 +4,14 @@ import '../../domain/entities/task.dart';
 import '../states/task_page_state.dart';
 
 class TasksViewModel extends ViewModel<TaskPageState> {
-  TasksViewModel() : super(const TaskPageState());
+  TasksViewModel() : super(const TaskPageState(isLoading: true));
+
+  @override
+  Future<void> init() => fetchTasks();
 
   Future<void> fetchTasks() async {
     state = state.copyWith(isLoading: true);
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(milliseconds: 500));
     state = state.copyWith(
       todoTasks: [
         Task(title: 'Task 1', isDone: false),
