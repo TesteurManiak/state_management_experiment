@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 
+/// A [ChangeNotifier] mixin that automatically disposes itself
+/// when it has no more listeners.
 mixin AutoDisposeNotifier on ChangeNotifier {
   bool _disposed = false;
   bool get disposed => _disposed;
