@@ -49,10 +49,10 @@ class _CounterPageState extends State<CounterPage> {
 ```dart
 @override
 Widget build(BuildContext context) {
-    return ListenableBuilder(
+    return ValueListenableBuilder(
         listenable: viewModel,
-        builder: (context, _) {
-            final counter = viewModel.state.counter;
+        builder: (context, state, _) {
+            final counter = state.counter;
             // ...
         },
     );
@@ -71,6 +71,16 @@ Widget build(BuildContext context) {
             // ...
         },
     );
+}
+```
+
+###### Use the `watch(context)` extension for less boilerplate
+
+```dart
+@override
+Widget build(BuildContext context) {
+    final counter = viewModel.select((state) => state.counter).watch(context);
+    return Text('$counter');
 }
 ```
 
