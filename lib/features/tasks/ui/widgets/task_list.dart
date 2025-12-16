@@ -1,20 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:state_management/state_management.dart';
-import 'package:state_management_experiment/core/mixins/hook.dart';
 
 import '../../domain/entities/task.dart';
 import '../view_models/tasks_view_model.dart';
 import 'app_loader.dart';
 
-class TaskList extends StatefulWidget {
-  const TaskList({super.key});
+class TaskList extends StatelessWidget {
+  const TaskList({required this.viewModel, super.key});
 
-  @override
-  State<TaskList> createState() => _TaskListState();
-}
-
-class _TaskListState extends State<TaskList> with HookMixin {
-  late final viewModel = useNotifier(TasksViewModel());
+  final TasksViewModel viewModel;
 
   @override
   Widget build(BuildContext context) {
