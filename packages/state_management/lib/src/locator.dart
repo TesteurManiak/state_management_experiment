@@ -3,8 +3,8 @@ import 'package:flutter/foundation.dart';
 typedef LocatorCreate<T> = T Function();
 typedef OnDisposeCallback<T> = void Function(T value);
 
-/// A locator that lazily creates an instance of a type [T], accessible through
-/// the singleton [instance] getter.
+/// A service locator that lazily creates an instance of a type [T], accessible
+/// through the singleton [instance] getter.
 ///
 /// You can provide an optional [onDispose] callback that will be called
 /// when the locator is invalidated using the [invalidate] method.
