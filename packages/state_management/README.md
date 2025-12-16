@@ -7,6 +7,8 @@ An experimentation in implementing state management concepts in Flutter without 
 You can use the `Locator` class to register and retrieve singleton instances of your services (e.g., repositories, API clients, etc.). Prefer using `ViewModelLocator` to bind the lifecycle of your services to your ViewModels ([check](#use-a-viewmodellocator-to-share-it-globally-or-any-di-mechanism-you-like)).
 
 ```dart
+final repositoryLocator = Locator<MyRepository>(MyRepositoryImpl.new);
+```
 
 ## State Management Concepts
 
