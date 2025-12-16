@@ -4,7 +4,7 @@ An experimentation in implementing state management concepts in Flutter without 
 
 ## Dependency Injection
 
-You can use the `Locator` class to register and retrieve singleton instances of your services (e.g., repositories, API clients, etc.). Prefer using `ViewModelLocator` to bind the lifecycle of your services to your ViewModels (check the example below).
+You can use the `Locator` class to register and retrieve singleton instances of your services (e.g., repositories, API clients, etc.). Prefer using `ViewModelLocator` to bind the lifecycle of your services to your ViewModels ([check](#use-a-viewmodellocator-to-share-it-globally-or-any-di-mechanism-you-like)).
 
 ```dart
 
