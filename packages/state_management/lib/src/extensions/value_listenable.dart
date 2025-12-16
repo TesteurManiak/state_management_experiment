@@ -1,7 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-mixin WatchListenable<T> on ValueListenable<T> {
+extension ValueListenableWatchExtension<T> on ValueListenable<T> {
+  /// Watches a [ValueListenable] and rebuilds the widget when it changes.
   T watch(BuildContext context) {
     void watchListener() {
       if (context is! Element || !context.mounted || context.dirty) {

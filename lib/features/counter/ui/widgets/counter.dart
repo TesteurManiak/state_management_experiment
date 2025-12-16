@@ -16,7 +16,7 @@ class Counter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final count = context.watch(counterListenable);
+    final count = counterListenable.watch(context);
 
     return Center(
       child: Column(

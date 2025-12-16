@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 
 import 'mixins/auto_dispose_notifier.dart';
 import 'mixins/hook_notifier.dart';
-import 'mixins/watch_notifier.dart';
 
 /// Base [ValueNotifier] class used to define view models.
 ///
@@ -42,7 +41,7 @@ abstract class ViewModel<State> extends ChangeNotifier
 
   /// Creates a [_SelectorNotifier] that listens to changes in the view model
   /// to observe a subset of the state.
-  WatchListenable<S> select<S>(SelectCallback<State, S> selector) {
+  ValueListenable<S> select<S>(SelectCallback<State, S> selector) {
     final notifier = useNotifier(_SelectorNotifier(() => selector(state)));
 
     addListener(notifier.notify);
@@ -58,8 +57,7 @@ typedef SelectCallback<State, S> = S Function(State state);
 /// This class is used to listen to changes in the view model and notify
 /// listeners when the selected state changes.
 /// This class is used internally by [ViewModel.select].
-class _SelectorNotifier<T> extends ValueNotifier<T>
-    with WatchListenable, AutoDisposeNotifier {
+class _SelectorNotifier<T> extends ValueNotifier<T> with AutoDisposeNotifier {
   _SelectorNotifier(this.getValue) : super(getValue());
 
   final T Function() getValue;
