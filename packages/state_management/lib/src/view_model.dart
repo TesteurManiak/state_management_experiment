@@ -24,6 +24,10 @@ abstract class ViewModel<State> extends ChangeNotifier
   State _state;
   State get state => _state;
 
+  /// Callback invoked when there are no more subscribers to this view model.
+  VoidCallback? _onUnsubscribed;
+  set onUnsubscribed(VoidCallback? callback) => _onUnsubscribed = callback;
+
   @protected
   set state(State value) {
     if (_state == value) return;
@@ -38,6 +42,12 @@ abstract class ViewModel<State> extends ChangeNotifier
 
   @override
   State get value => _state;
+
+  @override
+  void removeListener(final VoidCallback listener) {
+    super.removeListener(listener);
+    if (!hasListeners) _onUnsubscribed?.call();
+  }
 
   /// Creates a [_SelectorNotifier] that listens to changes in the view model
   /// to observe a subset of the state.

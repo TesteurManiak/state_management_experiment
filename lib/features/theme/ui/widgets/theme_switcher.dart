@@ -9,16 +9,15 @@ class ThemeSwitcher extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewModel = themeViewModel.instance;
-    final darkModeNotifier =
-        viewModel.select((s) => s.toBrightness() == Brightness.dark);
+    final darkModeNotifier = viewModel.select(
+      (s) => s.toBrightness() == Brightness.dark,
+    );
 
     return ValueListenableBuilder<bool>(
-        valueListenable: darkModeNotifier,
-        builder: (context, isDark, _) {
-          return Switch(
-            value: isDark,
-            onChanged: (_) => viewModel.toggle(),
-          );
-        });
+      valueListenable: darkModeNotifier,
+      builder: (context, isDark, _) {
+        return Switch(value: isDark, onChanged: (_) => viewModel.toggle());
+      },
+    );
   }
 }

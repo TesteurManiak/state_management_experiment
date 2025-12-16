@@ -2,6 +2,12 @@
 
 An experimentation in implementing state management concepts in Flutter without using any external packages.
 
+## Dependency Injection
+
+You can use the `Locator` class to register and retrieve singleton instances of your services (e.g., repositories, API clients, etc.). Prefer using `ViewModelLocator` to bind the lifecycle of your services to your ViewModels (check the example below).
+
+```dart
+
 ## State Management Concepts
 
 ### 1. Create a State
@@ -26,7 +32,9 @@ class CounterPageViewModel extends ViewModel<CounterState> {
 }
 ```
 
-### 3. Use it in your Widget
+### 3. Lifecycle Management
+
+###### Bind ViewModel to Widget Lifecycle
 
 ```dart
 class CounterPage extends StatefulWidget { /* ... */ }
@@ -43,6 +51,14 @@ class _CounterPageState extends State<CounterPage> {
   // ...
 }
 ```
+
+###### Use a `ViewModelLocator` to share it globally (or any DI mechanism you like)
+
+```dart
+final counterLocator = ViewModelLocator<CounterPageViewModel>(CounterPageViewModel.new, autodispose: true);
+```
+
+### 4. Use it in your Widget
 
 ###### Rebuild the UI when the state changes
 
