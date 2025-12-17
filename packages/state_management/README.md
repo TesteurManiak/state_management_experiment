@@ -4,7 +4,7 @@ An experimentation in implementing state management concepts in Flutter without 
 
 ## Dependency Injection
 
-You can use the `Locator` class to register and retrieve singleton instances of your services (e.g., repositories, API clients, etc.). Prefer using `NotifierLocator` to bind the lifecycle of your `Notiffier`s ([check](#use-a-notifierlocator-to-share-it-globally-or-any-di-mechanism-you-like)).
+You can use the `Locator` class to register and retrieve singleton instances of your services (e.g., repositories, API clients, etc.). Prefer using `NotifierLocator` to bind the lifecycle of your `Notifier`s ([check](#use-a-notifierlocator-to-share-it-globally-or-any-di-mechanism-you-like)).
 
 ```dart
 final repositoryLocator = Locator<MyRepository>(MyRepositoryImpl.new);
