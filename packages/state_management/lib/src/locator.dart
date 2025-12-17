@@ -35,6 +35,7 @@ class Locator<T> {
   /// [_create] function.
   ///
   /// If you override this method, make sure to call `super.dispose()` last.
+  @mustCallSuper
   void dispose() {
     onDispose?.call();
     _instance = null;
