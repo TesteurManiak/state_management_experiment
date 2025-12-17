@@ -12,12 +12,12 @@ class DualCountersPage extends StatefulWidget {
 }
 
 class _DualCountersPageState extends State<DualCountersPage> with HookMixin {
-  late final viewModel = useNotifier(DualCountersViewModel());
-  late final counterA = viewModel.select((state) => state.counter1);
+  late final viewNotifier = useNotifier(DualCountersNotifier());
+  late final counterA = viewNotifier.select((state) => state.counter1);
 
   @override
   Widget build(BuildContext context) {
-    final counterB = viewModel.select((state) => state.counter2);
+    final counterB = viewNotifier.select((state) => state.counter2);
 
     return Scaffold(
       appBar: AppBar(
@@ -25,7 +25,7 @@ class _DualCountersPageState extends State<DualCountersPage> with HookMixin {
         actions: [
           IconButton(
             icon: Icon(Icons.refresh),
-            onPressed: () => viewModel.reset(),
+            onPressed: () => viewNotifier.reset(),
           ),
         ],
       ),
@@ -34,13 +34,13 @@ class _DualCountersPageState extends State<DualCountersPage> with HookMixin {
           Expanded(
             child: Counter(
               counterListenable: counterA,
-              onIncrement: () => viewModel.incrementFirstCounter(),
+              onIncrement: () => viewNotifier.incrementFirstCounter(),
             ),
           ),
           Expanded(
             child: Counter(
               counterListenable: counterB,
-              onIncrement: () => viewModel.incrementSecondCounter(),
+              onIncrement: () => viewNotifier.incrementSecondCounter(),
             ),
           ),
         ],

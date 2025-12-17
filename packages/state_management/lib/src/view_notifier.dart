@@ -2,31 +2,28 @@ import 'package:flutter/foundation.dart';
 
 import 'mixins/auto_dispose_notifier.dart';
 import 'mixins/hook_notifier.dart';
+import 'mixins/unsubscribe_notifier.dart';
 
-/// Base [ValueNotifier] class used to define view models.
+/// Base class used to define view notifiers.
 ///
 /// ## Example
 /// ```dart
-/// class CounterPageViewModel extends ViewModel<int> {
-///   CounterPageViewModel() : super(0);
+/// class CounterPageViewNotifier extends ViewNotifier<int> {
+///   CounterPageViewNotifier() : super(0);
 ///
 ///   void increment() => state++;
 ///   void decrement() => state--;
 /// }
 /// ```
-abstract class ViewModel<State> extends ChangeNotifier
-    with HookNotifierMixin
+abstract class ViewNotifier<State> extends ChangeNotifier
+    with HookNotifierMixin, UnsubscribeNotifier
     implements ValueListenable<State> {
-  ViewModel(this._state) {
+  ViewNotifier(this._state) {
     init();
   }
 
   State _state;
   State get state => _state;
-
-  /// Callback invoked when there are no more subscribers to this view model.
-  VoidCallback? _onUnsubscribed;
-  set onUnsubscribed(VoidCallback? callback) => _onUnsubscribed = callback;
 
   @protected
   set state(State value) {
@@ -43,12 +40,6 @@ abstract class ViewModel<State> extends ChangeNotifier
   @override
   State get value => _state;
 
-  @override
-  void removeListener(final VoidCallback listener) {
-    super.removeListener(listener);
-    if (!hasListeners) _onUnsubscribed?.call();
-  }
-
   /// Creates a [_SelectorNotifier] that listens to changes in the view model
   /// to observe a subset of the state.
   ValueListenable<S> select<S>(SelectCallback<State, S> selector) {
@@ -63,10 +54,10 @@ abstract class ViewModel<State> extends ChangeNotifier
 
 typedef SelectCallback<State, S> = S Function(State state);
 
-/// A representation of a [ViewModel]'s subset of the state.
+/// A representation of a [ViewNotifier]'s subset of the state.
 /// This class is used to listen to changes in the view model and notify
 /// listeners when the selected state changes.
-/// This class is used internally by [ViewModel.select].
+/// This class is used internally by [ViewNotifier.select].
 class _SelectorNotifier<T> extends ValueNotifier<T> with AutoDisposeNotifier {
   _SelectorNotifier(this.getValue) : super(getValue());
 

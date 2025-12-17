@@ -12,7 +12,7 @@ class TasksPage extends StatefulWidget {
 }
 
 class _TasksPageState extends State<TasksPage> with HookMixin {
-  late final viewModel = useNotifier(TasksViewModel());
+  late final viewNotifier = useNotifier(TasksNotifier());
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class _TasksPageState extends State<TasksPage> with HookMixin {
             ],
           ),
         ),
-        body: TaskList(viewModel: viewModel),
+        body: TaskList(viewNotifier: viewNotifier),
       ),
     );
   }

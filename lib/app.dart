@@ -9,7 +9,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-      valueListenable: themeViewModel.instance,
+      valueListenable: themeNotifier.instance,
       builder: (context, themeMode, _) {
         return MaterialApp(
           themeMode: themeMode,

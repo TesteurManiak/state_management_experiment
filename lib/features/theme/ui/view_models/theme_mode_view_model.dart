@@ -4,8 +4,8 @@ import 'package:state_management/state_management.dart';
 
 const _kDefaultThemeMode = ThemeMode.system;
 
-class ThemeModeViewModel extends ViewModel<ThemeMode> {
-  ThemeModeViewModel({ThemeMode? initialThemeMode})
+class ThemeModeNotifier extends ViewNotifier<ThemeMode> {
+  ThemeModeNotifier({ThemeMode? initialThemeMode})
     : super(initialThemeMode ?? _kDefaultThemeMode);
 
   void toggle() {
@@ -21,6 +21,4 @@ class ThemeModeViewModel extends ViewModel<ThemeMode> {
   }
 }
 
-final themeViewModel = ViewModelLocator<ThemeModeViewModel>(
-  ThemeModeViewModel.new,
-);
+final themeNotifier = NotifierLocator(ThemeModeNotifier.new);

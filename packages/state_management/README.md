@@ -4,7 +4,7 @@ An experimentation in implementing state management concepts in Flutter without 
 
 ## Dependency Injection
 
-You can use the `Locator` class to register and retrieve singleton instances of your services (e.g., repositories, API clients, etc.). Prefer using `ViewModelLocator` to bind the lifecycle of your services to your ViewModels ([check](#use-a-viewmodellocator-to-share-it-globally-or-any-di-mechanism-you-like)).
+You can use the `Locator` class to register and retrieve singleton instances of your services (e.g., repositories, API clients, etc.). Prefer using `NotifierLocator` to bind the lifecycle of your ViewNotifiers ([check](#use-a-notifierlocator-to-share-it-globally-or-any-di-mechanism-you-like)).
 
 ```dart
 final repositoryLocator = Locator<MyRepository>(MyRepositoryImpl.new);
@@ -23,11 +23,11 @@ abstract class CounterState with _$CounterState {
 }
 ```
 
-### 2. Create a `ViewModel`
+### 2. Create a `ViewNotifier`
 
 ```dart
-class CounterPageViewModel extends ViewModel<CounterState> {
-  CounterPageViewModel() : super(const CounterState());
+class CounterPageNotifier extends ViewNotifier<CounterState> {
+  CounterPageNotifier() : super(const CounterState());
 
   void increment() => state = state.copyWith(counter: state.counter + 1);
   void decrement() => state = state.copyWith(counter: state.counter - 1);
@@ -36,17 +36,17 @@ class CounterPageViewModel extends ViewModel<CounterState> {
 
 ### 3. Lifecycle Management
 
-###### Bind ViewModel to Widget Lifecycle
+###### Bind ViewNotifier to Widget Lifecycle
 
 ```dart
 class CounterPage extends StatefulWidget { /* ... */ }
 
 class _CounterPageState extends State<CounterPage> {
-  final viewModel = CounterPageViewModel();
+  final viewNotifier = CounterPageNotifier();
 
   @override
   void dispose() {
-    viewModel.dispose();
+    viewNotifier.dispose();
     super.dispose();
   }
 
@@ -54,10 +54,10 @@ class _CounterPageState extends State<CounterPage> {
 }
 ```
 
-###### Use a `ViewModelLocator` to share it globally (or any DI mechanism you like)
+###### Use a `NotifierLocator` to share it globally (or any DI mechanism you like)
 
 ```dart
-final counterLocator = ViewModelLocator<CounterPageViewModel>(CounterPageViewModel.new, autodispose: true);
+final counterLocator = NotifierLocator(CounterPageNotifier.new, autodispose: true);
 ```
 
 ### 4. Use it in your Widget
@@ -68,7 +68,7 @@ final counterLocator = ViewModelLocator<CounterPageViewModel>(CounterPageViewMod
 @override
 Widget build(BuildContext context) {
     return ValueListenableBuilder(
-        listenable: viewModel,
+        listenable: viewNotifier,
         builder: (context, state, _) {
             final counter = state.counter;
             // ...
@@ -82,7 +82,7 @@ Widget build(BuildContext context) {
 ```dart
 @override
 Widget build(BuildContext context) {
-    final counterNotifier = viewModel.select((state) => state.counter);
+    final counterNotifier = viewNotifier.select((state) => state.counter);
     return ValueListenableBuilder(
         valueListenable: counterNotifier,
         builder: (context, counter, _) {
@@ -97,7 +97,7 @@ Widget build(BuildContext context) {
 ```dart
 @override
 Widget build(BuildContext context) {
-    final counter = viewModel.select((state) => state.counter).watch(context);
+    final counter = viewNotifier.select((state) => state.counter).watch(context);
     return Text('$counter');
 }
 ```

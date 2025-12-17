@@ -3,8 +3,8 @@ import 'package:state_management/state_management.dart';
 import '../../domain/entities/task.dart';
 import '../states/task_page_state.dart';
 
-class TasksViewModel extends ViewModel<TaskPageState> {
-  TasksViewModel() : super(const TaskPageState(isLoading: true));
+class TasksNotifier extends ViewNotifier<TaskPageState> {
+  TasksNotifier() : super(const TaskPageState(isLoading: true));
 
   @override
   Future<void> init() => fetchTasks();

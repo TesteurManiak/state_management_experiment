@@ -13,19 +13,17 @@ class CounterPage extends StatefulWidget {
 }
 
 class _CounterPageState extends State<CounterPage> with HookMixin {
-  late final viewModel = useNotifier(CounterPageViewModel());
+  late final viewNotifier = useNotifier(CounterPageNotifier());
 
   @override
   Widget build(BuildContext context) {
-    final counterNotifier = viewModel.select((state) => state.counter);
+    final counterNotifier = viewNotifier.select((state) => state.counter);
     return Scaffold(
-      appBar: AppBar(
-        actions: [ThemeSwitcher()],
-      ),
+      appBar: AppBar(actions: [ThemeSwitcher()]),
       body: Counter(
         counterListenable: counterNotifier,
-        onIncrement: viewModel.increment,
-        onDecrement: viewModel.decrement,
+        onIncrement: viewNotifier.increment,
+        onDecrement: viewNotifier.decrement,
       ),
     );
   }
