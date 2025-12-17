@@ -15,6 +15,9 @@ class NotifierLocator<T extends UnsubscribeNotifier> extends Locator<T> {
 
   final bool autodispose;
 
+  bool _disposed = false;
+  bool get disposed => _disposed;
+
   @override
   T get instance {
     // Setup autodispose if enabled
@@ -25,8 +28,10 @@ class NotifierLocator<T extends UnsubscribeNotifier> extends Locator<T> {
 
   @override
   void dispose() {
+    if (_disposed) return;
     instance.dispose();
     super.dispose();
+    _disposed = true;
   }
 
   void _onUnsubscribe() {
