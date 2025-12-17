@@ -4,7 +4,7 @@ import 'package:state_management/state_management.dart';
 
 const _kDefaultThemeMode = ThemeMode.system;
 
-class ThemeModeNotifier extends ViewNotifier<ThemeMode> {
+class ThemeModeNotifier extends Notifier<ThemeMode> {
   ThemeModeNotifier({ThemeMode? initialThemeMode})
     : super(initialThemeMode ?? _kDefaultThemeMode);
 

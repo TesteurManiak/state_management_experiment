@@ -2,7 +2,7 @@ import 'package:state_management/state_management.dart';
 
 import '../states/dual_counters_state.dart';
 
-class DualCountersNotifier extends ViewNotifier<DualCountersState> {
+class DualCountersNotifier extends Notifier<DualCountersState> {
   DualCountersNotifier() : super(const DualCountersState());
 
   void reset() => state = const DualCountersState();

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:state_management_experiment/core/mixins/hook.dart';
 
 import '../../../counter/ui/widgets/counter.dart';
-import '../view_models/dual_counters_view_model.dart';
+import '../notifiers/dual_counters_notifier.dart';
 
 class DualCountersPage extends StatefulWidget {
   const DualCountersPage({super.key});
@@ -12,12 +12,12 @@ class DualCountersPage extends StatefulWidget {
 }
 
 class _DualCountersPageState extends State<DualCountersPage> with HookMixin {
-  late final viewNotifier = useNotifier(DualCountersNotifier());
-  late final counterA = viewNotifier.select((state) => state.counter1);
+  late final notifier = useNotifier(DualCountersNotifier());
+  late final counterA = notifier.select((state) => state.counter1);
 
   @override
   Widget build(BuildContext context) {
-    final counterB = viewNotifier.select((state) => state.counter2);
+    final counterB = notifier.select((state) => state.counter2);
 
     return Scaffold(
       appBar: AppBar(
@@ -25,7 +25,7 @@ class _DualCountersPageState extends State<DualCountersPage> with HookMixin {
         actions: [
           IconButton(
             icon: Icon(Icons.refresh),
-            onPressed: () => viewNotifier.reset(),
+            onPressed: () => notifier.reset(),
           ),
         ],
       ),
@@ -34,13 +34,13 @@ class _DualCountersPageState extends State<DualCountersPage> with HookMixin {
           Expanded(
             child: Counter(
               counterListenable: counterA,
-              onIncrement: () => viewNotifier.incrementFirstCounter(),
+              onIncrement: () => notifier.incrementFirstCounter(),
             ),
           ),
           Expanded(
             child: Counter(
               counterListenable: counterB,
-              onIncrement: () => viewNotifier.incrementSecondCounter(),
+              onIncrement: () => notifier.incrementSecondCounter(),
             ),
           ),
         ],

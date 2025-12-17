@@ -4,21 +4,21 @@ import 'mixins/auto_dispose_notifier.dart';
 import 'mixins/hook_notifier.dart';
 import 'mixins/unsubscribe_notifier.dart';
 
-/// Base class used to define view notifiers.
+/// Base class used to define notifiers.
 ///
 /// ## Example
 /// ```dart
-/// class CounterPageViewNotifier extends ViewNotifier<int> {
-///   CounterPageViewNotifier() : super(0);
+/// class CounterPageNotifier extends Notifier<int> {
+///   CounterPageNotifier() : super(0);
 ///
 ///   void increment() => state++;
 ///   void decrement() => state--;
 /// }
 /// ```
-abstract class ViewNotifier<State> extends ChangeNotifier
+abstract class Notifier<State> extends ChangeNotifier
     with HookNotifierMixin, UnsubscribeNotifier
     implements ValueListenable<State> {
-  ViewNotifier(this._state) {
+  Notifier(this._state) {
     init();
   }
 
@@ -54,10 +54,10 @@ abstract class ViewNotifier<State> extends ChangeNotifier
 
 typedef SelectCallback<State, S> = S Function(State state);
 
-/// A representation of a [ViewNotifier]'s subset of the state.
+/// A representation of a [Notifier]'s subset of the state.
 /// This class is used to listen to changes in the view model and notify
 /// listeners when the selected state changes.
-/// This class is used internally by [ViewNotifier.select].
+/// This class is used internally by [Notifier.select].
 class _SelectorNotifier<T> extends ValueNotifier<T> with AutoDisposeNotifier {
   _SelectorNotifier(this.getValue) : super(getValue());
 

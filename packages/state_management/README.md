@@ -4,7 +4,7 @@ An experimentation in implementing state management concepts in Flutter without 
 
 ## Dependency Injection
 
-You can use the `Locator` class to register and retrieve singleton instances of your services (e.g., repositories, API clients, etc.). Prefer using `NotifierLocator` to bind the lifecycle of your ViewNotifiers ([check](#use-a-notifierlocator-to-share-it-globally-or-any-di-mechanism-you-like)).
+You can use the `Locator` class to register and retrieve singleton instances of your services (e.g., repositories, API clients, etc.). Prefer using `NotifierLocator` to bind the lifecycle of your `Notiffier`s ([check](#use-a-notifierlocator-to-share-it-globally-or-any-di-mechanism-you-like)).
 
 ```dart
 final repositoryLocator = Locator<MyRepository>(MyRepositoryImpl.new);
@@ -23,10 +23,10 @@ abstract class CounterState with _$CounterState {
 }
 ```
 
-### 2. Create a `ViewNotifier`
+### 2. Create a `Notifier`
 
 ```dart
-class CounterPageNotifier extends ViewNotifier<CounterState> {
+class CounterPageNotifier extends Notifier<CounterState> {
   CounterPageNotifier() : super(const CounterState());
 
   void increment() => state = state.copyWith(counter: state.counter + 1);
@@ -36,17 +36,17 @@ class CounterPageNotifier extends ViewNotifier<CounterState> {
 
 ### 3. Lifecycle Management
 
-###### Bind ViewNotifier to Widget Lifecycle
+###### Bind Notifier to the Widget Lifecycle
 
 ```dart
 class CounterPage extends StatefulWidget { /* ... */ }
 
 class _CounterPageState extends State<CounterPage> {
-  final viewNotifier = CounterPageNotifier();
+  final notifier = CounterPageNotifier();
 
   @override
   void dispose() {
-    viewNotifier.dispose();
+    notifier.dispose();
     super.dispose();
   }
 
@@ -68,7 +68,7 @@ final counterLocator = NotifierLocator(CounterPageNotifier.new, autodispose: tru
 @override
 Widget build(BuildContext context) {
     return ValueListenableBuilder(
-        listenable: viewNotifier,
+        listenable: notifier,
         builder: (context, state, _) {
             final counter = state.counter;
             // ...
@@ -82,7 +82,7 @@ Widget build(BuildContext context) {
 ```dart
 @override
 Widget build(BuildContext context) {
-    final counterNotifier = viewNotifier.select((state) => state.counter);
+    final counterNotifier = notifier.select((state) => state.counter);
     return ValueListenableBuilder(
         valueListenable: counterNotifier,
         builder: (context, counter, _) {
@@ -97,7 +97,7 @@ Widget build(BuildContext context) {
 ```dart
 @override
 Widget build(BuildContext context) {
-    final counter = viewNotifier.select((state) => state.counter).watch(context);
+    final counter = notifier.select((state) => state.counter).watch(context);
     return Text('$counter');
 }
 ```

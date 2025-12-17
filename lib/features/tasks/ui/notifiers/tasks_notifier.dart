@@ -3,7 +3,7 @@ import 'package:state_management/state_management.dart';
 import '../../domain/entities/task.dart';
 import '../states/task_page_state.dart';
 
-class TasksNotifier extends ViewNotifier<TaskPageState> {
+class TasksNotifier extends Notifier<TaskPageState> {
   TasksNotifier() : super(const TaskPageState(isLoading: true));
 
   @override

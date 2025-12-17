@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'features/home/ui/pages/home_page.dart';
-import 'features/theme/ui/view_models/theme_mode_view_model.dart';
+import 'features/theme/ui/notifiers/theme_mode_notifier.dart';
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});

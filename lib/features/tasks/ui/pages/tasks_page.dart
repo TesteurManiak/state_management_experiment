@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:state_management_experiment/core/mixins/hook.dart';
 
-import '../view_models/tasks_view_model.dart';
+import '../notifiers/tasks_notifier.dart';
 import '../widgets/task_list.dart';
 
 class TasksPage extends StatefulWidget {
@@ -12,7 +12,7 @@ class TasksPage extends StatefulWidget {
 }
 
 class _TasksPageState extends State<TasksPage> with HookMixin {
-  late final viewNotifier = useNotifier(TasksNotifier());
+  late final notifier = useNotifier(TasksNotifier());
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class _TasksPageState extends State<TasksPage> with HookMixin {
             ],
           ),
         ),
-        body: TaskList(viewNotifier: viewNotifier),
+        body: TaskList(notifier: notifier),
       ),
     );
   }
