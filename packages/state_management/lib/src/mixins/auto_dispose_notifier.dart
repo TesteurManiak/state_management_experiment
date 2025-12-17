@@ -16,6 +16,7 @@ mixin AutoDisposeNotifier on ChangeNotifier {
   @mustCallSuper
   @override
   void dispose() {
+    if (_disposed) return;
     super.dispose();
     _disposed = true;
   }
