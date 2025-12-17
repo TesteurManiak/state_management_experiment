@@ -6,6 +6,7 @@ mixin AutoDisposeNotifier on ChangeNotifier {
   bool _disposed = false;
   bool get disposed => _disposed;
 
+  @mustCallSuper
   @override
   void removeListener(VoidCallback listener) {
     super.removeListener(listener);
