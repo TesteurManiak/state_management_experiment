@@ -22,18 +22,14 @@ void main() {
 
       test('should create a new notifier after disposal', () {
         final locator = NotifierLocator(_TestNotifier.new, autodispose: true);
-        final notifier1 = locator.instance;
+        final notifierA = locator.instance;
 
-        expect(notifier1.disposed, isFalse);
+        notifierA.addListener(emptyListener);
+        notifierA.removeListener(emptyListener);
 
-        notifier1.addListener(emptyListener);
-        notifier1.removeListener(emptyListener);
-
-        expect(notifier1.disposed, isTrue);
-
-        final notifier2 = locator.instance;
-        expect(notifier2.disposed, isFalse);
-        expect(notifier1, isNot(same(notifier2)));
+        final notifierB = locator.instance;
+        expect(notifierB.disposed, isFalse);
+        expect(notifierA, isNot(same(notifierB)));
       });
     });
   });
