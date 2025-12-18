@@ -9,10 +9,7 @@ void main() {
       void emptyListener() {}
 
       test('should call dispose when there is no more listeners', () {
-        final locator = NotifierLocator(
-          _DisposableNotifier.new,
-          autodispose: true,
-        );
+        final locator = NotifierLocator(_TestNotifier.new, autodispose: true);
         final notifier = locator.instance;
 
         expect(notifier.disposed, isFalse);
@@ -24,10 +21,7 @@ void main() {
       });
 
       test('should create a new notifier after disposal', () {
-        final locator = NotifierLocator(
-          _DisposableNotifier.new,
-          autodispose: true,
-        );
+        final locator = NotifierLocator(_TestNotifier.new, autodispose: true);
         final notifier1 = locator.instance;
 
         expect(notifier1.disposed, isFalse);
@@ -45,7 +39,7 @@ void main() {
   });
 }
 
-class _DisposableNotifier extends ChangeNotifier with UnsubscribeNotifier {
+class _TestNotifier extends ChangeNotifier with UnsubscribeNotifier {
   bool _disposed = false;
   bool get disposed => _disposed;
 
