@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'task.dart';
@@ -9,6 +9,7 @@ part of 'task.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $TaskCopyWith<Task> get copyWith => _$TaskCopyWithImpl<Task>(this as Task, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Task&&(identical(other.title, title) || other.title == title)&&(identical(other.isDone, isDone) || other.isDone == isDone));
+  final _this = this as Task;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Task&&(identical(other.title, _this.title) || other.title == _this.title)&&(identical(other.isDone, _this.isDone) || other.isDone == _this.isDone));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,title,isDone);
+int get hashCode {
+  final _this = this as Task;
+  return Object.hash(runtimeType,_this.title,_this.isDone);
+}
 
 @override
 String toString() {
-  return 'Task(title: $title, isDone: $isDone)';
+  final _this = this as Task;
+  return 'Task(title: ${_this.title}, isDone: ${_this.isDone})';
 }
 
 
@@ -63,7 +69,7 @@ class _$TaskCopyWithImpl<$Res>
 /// Create a copy of Task
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? title = null,Object? isDone = null,}) {
-  return _then(_self.copyWith(
+  return _then(Task(
 title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,isDone: null == isDone ? _self.isDone : isDone // ignore: cast_nullable_to_non_nullable
 as bool,
@@ -223,16 +229,18 @@ _$TaskCopyWith<_Task> get copyWith => __$TaskCopyWithImpl<_Task>(this, _$identit
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Task&&(identical(other.title, title) || other.title == title)&&(identical(other.isDone, isDone) || other.isDone == isDone));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Task&&(identical(other.title, title) || other.title == title)&&(identical(other.isDone, isDone) || other.isDone == isDone));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,title,isDone);
+int get hashCode {
+    return Object.hash(runtimeType,title,isDone);
+}
 
 @override
 String toString() {
-  return 'Task(title: $title, isDone: $isDone)';
+    return 'Task(title: $title, isDone: $isDone)';
 }
 
 

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'dual_counters_state.dart';
@@ -9,6 +9,7 @@ part of 'dual_counters_state.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $DualCountersStateCopyWith<DualCountersState> get copyWith => _$DualCountersStat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DualCountersState&&(identical(other.counter1, counter1) || other.counter1 == counter1)&&(identical(other.counter2, counter2) || other.counter2 == counter2));
+  final _this = this as DualCountersState;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DualCountersState&&(identical(other.counter1, _this.counter1) || other.counter1 == _this.counter1)&&(identical(other.counter2, _this.counter2) || other.counter2 == _this.counter2));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,counter1,counter2);
+int get hashCode {
+  final _this = this as DualCountersState;
+  return Object.hash(runtimeType,_this.counter1,_this.counter2);
+}
 
 @override
 String toString() {
-  return 'DualCountersState(counter1: $counter1, counter2: $counter2)';
+  final _this = this as DualCountersState;
+  return 'DualCountersState(counter1: ${_this.counter1}, counter2: ${_this.counter2})';
 }
 
 
@@ -63,7 +69,7 @@ class _$DualCountersStateCopyWithImpl<$Res>
 /// Create a copy of DualCountersState
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? counter1 = null,Object? counter2 = null,}) {
-  return _then(_self.copyWith(
+  return _then(DualCountersState(
 counter1: null == counter1 ? _self.counter1 : counter1 // ignore: cast_nullable_to_non_nullable
 as int,counter2: null == counter2 ? _self.counter2 : counter2 // ignore: cast_nullable_to_non_nullable
 as int,
@@ -223,16 +229,18 @@ _$DualCountersStateCopyWith<_DualCountersState> get copyWith => __$DualCountersS
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DualCountersState&&(identical(other.counter1, counter1) || other.counter1 == counter1)&&(identical(other.counter2, counter2) || other.counter2 == counter2));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _DualCountersState&&(identical(other.counter1, counter1) || other.counter1 == counter1)&&(identical(other.counter2, counter2) || other.counter2 == counter2));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,counter1,counter2);
+int get hashCode {
+    return Object.hash(runtimeType,counter1,counter2);
+}
 
 @override
 String toString() {
-  return 'DualCountersState(counter1: $counter1, counter2: $counter2)';
+    return 'DualCountersState(counter1: $counter1, counter2: $counter2)';
 }
 
 

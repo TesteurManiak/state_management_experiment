@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'task_page_state.dart';
@@ -9,6 +9,7 @@ part of 'task_page_state.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $TaskPageStateCopyWith<TaskPageState> get copyWith => _$TaskPageStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TaskPageState&&const DeepCollectionEquality().equals(other.todoTasks, todoTasks)&&const DeepCollectionEquality().equals(other.archivedTasks, archivedTasks)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading));
+  final _this = this as TaskPageState;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TaskPageState&&const DeepCollectionEquality().equals(other.todoTasks, _this.todoTasks)&&const DeepCollectionEquality().equals(other.archivedTasks, _this.archivedTasks)&&(identical(other.isLoading, _this.isLoading) || other.isLoading == _this.isLoading));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(todoTasks),const DeepCollectionEquality().hash(archivedTasks),isLoading);
+int get hashCode {
+  final _this = this as TaskPageState;
+  return Object.hash(runtimeType,const DeepCollectionEquality().hash(_this.todoTasks),const DeepCollectionEquality().hash(_this.archivedTasks),_this.isLoading);
+}
 
 @override
 String toString() {
-  return 'TaskPageState(todoTasks: $todoTasks, archivedTasks: $archivedTasks, isLoading: $isLoading)';
+  final _this = this as TaskPageState;
+  return 'TaskPageState(todoTasks: ${_this.todoTasks}, archivedTasks: ${_this.archivedTasks}, isLoading: ${_this.isLoading})';
 }
 
 
@@ -63,7 +69,7 @@ class _$TaskPageStateCopyWithImpl<$Res>
 /// Create a copy of TaskPageState
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? todoTasks = null,Object? archivedTasks = null,Object? isLoading = null,}) {
-  return _then(_self.copyWith(
+  return _then(TaskPageState(
 todoTasks: null == todoTasks ? _self.todoTasks : todoTasks // ignore: cast_nullable_to_non_nullable
 as List<Task>,archivedTasks: null == archivedTasks ? _self.archivedTasks : archivedTasks // ignore: cast_nullable_to_non_nullable
 as List<Task>,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
@@ -208,7 +214,7 @@ return $default(_that.todoTasks,_that.archivedTasks,_that.isLoading);case _:
 
 
 class _TaskPageState implements TaskPageState {
-  const _TaskPageState({final  List<Task> todoTasks = const [], final  List<Task> archivedTasks = const [], this.isLoading = true}): _todoTasks = todoTasks,_archivedTasks = archivedTasks;
+  const _TaskPageState({ List<Task> todoTasks = const [],  List<Task> archivedTasks = const [], this.isLoading = true}): _todoTasks = todoTasks,_archivedTasks = archivedTasks;
   
 
  final  List<Task> _todoTasks;
@@ -237,16 +243,18 @@ _$TaskPageStateCopyWith<_TaskPageState> get copyWith => __$TaskPageStateCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TaskPageState&&const DeepCollectionEquality().equals(other._todoTasks, _todoTasks)&&const DeepCollectionEquality().equals(other._archivedTasks, _archivedTasks)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _TaskPageState&&const DeepCollectionEquality().equals(other.todoTasks, _todoTasks)&&const DeepCollectionEquality().equals(other.archivedTasks, _archivedTasks)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_todoTasks),const DeepCollectionEquality().hash(_archivedTasks),isLoading);
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_todoTasks),const DeepCollectionEquality().hash(_archivedTasks),isLoading);
+}
 
 @override
 String toString() {
-  return 'TaskPageState(todoTasks: $todoTasks, archivedTasks: $archivedTasks, isLoading: $isLoading)';
+    return 'TaskPageState(todoTasks: $todoTasks, archivedTasks: $archivedTasks, isLoading: $isLoading)';
 }
 
 
