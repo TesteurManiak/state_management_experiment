@@ -20,11 +20,21 @@ class Locator<T> {
   LocatorCreate<T>? _override;
 
   T? _instance;
+  bool _creating = false;
 
-  @mustCallSuper
   T get instance {
+    if (_instance case final i?) return i;
+    if (_creating) {
+      throw StateError('Re-entrant creation detected for Locator<$T>.');
+    }
+
     final creator = _override ?? _create;
-    return _instance ??= creator();
+    _creating = true;
+    try {
+      return _instance = creator();
+    } finally {
+      _creating = false;
+    }
   }
 
   /// Disposes the current instance of the locator.
