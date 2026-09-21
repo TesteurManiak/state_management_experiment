@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:state_management/state_management.dart';
+import 'package:state_management_experiment/features/tasks/ui/pages/tasks_page.dart';
 
 import '../../domain/entities/task.dart';
-import '../notifiers/tasks_notifier.dart';
 import 'app_loader.dart';
 
 class TaskList extends StatelessWidget {
-  const TaskList({required this.notifier, super.key});
-
-  final TasksNotifier notifier;
+  const TaskList({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final isLoading = notifier.select((s) => s.isLoading).watch(context);
-    final todo = notifier.select((s) => s.todoTasks).watch(context);
-    final archived = notifier.select((s) => s.archivedTasks).watch(context);
+    final isLoading = tasksNotifier().select((s) => s.isLoading).watch(context);
+    final todo = tasksNotifier().select((s) => s.todoTasks).watch(context);
+    final archived = tasksNotifier()
+        .select((s) => s.archivedTasks)
+        .watch(context);
 
     return Padding(
       padding: const .all(16.0),
@@ -22,8 +22,8 @@ class TaskList extends StatelessWidget {
           ? AppLoader()
           : TabBarView(
               children: <Widget>[
-                _TaskListDetail(taskList: todo, notifier: notifier),
-                _TaskListDetail(taskList: archived, notifier: notifier),
+                _TaskListDetail(taskList: todo),
+                _TaskListDetail(taskList: archived),
               ],
             ),
     );
@@ -31,26 +31,22 @@ class TaskList extends StatelessWidget {
 }
 
 class _TaskListDetail extends StatelessWidget {
-  const _TaskListDetail({required this.taskList, required this.notifier});
+  const _TaskListDetail({required this.taskList});
 
   final List<Task> taskList;
-  final TasksNotifier notifier;
 
   @override
   Widget build(BuildContext context) {
     return ListView(
-      children: [
-        for (final task in taskList) _TaskItem(task: task, notifier: notifier),
-      ],
+      children: [for (final task in taskList) _TaskItem(task: task)],
     );
   }
 }
 
 class _TaskItem extends StatelessWidget {
-  const _TaskItem({required this.task, required this.notifier});
+  const _TaskItem({required this.task});
 
   final Task task;
-  final TasksNotifier notifier;
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +55,7 @@ class _TaskItem extends StatelessWidget {
         Text(task.title),
         Spacer(),
         IconButton(
-          onPressed: () => notifier.toggleTaskStatus(task),
+          onPressed: () => tasksNotifier().toggleTaskStatus(task),
           icon: Icon(task.isDone ? Icons.hourglass_empty : Icons.done),
         ),
       ],

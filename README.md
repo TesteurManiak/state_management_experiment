@@ -42,12 +42,12 @@ class ViewNotifier extends Notifier<ViewState> {
     }
 }
 
-final viewNotifier = NotifierLocator(() => ViewNotifier(apiService: apiService.instance), autoDispose: true);
+final viewNotifier = NotifierLocator(() => ViewNotifier(apiService: apiService()), autoDispose: true);
 
 class MyView extends StatelessWidget {
     @override
     Widget build(BuildContext context) {
-        final viewState = viewNotifier.instance.watch(context);
+        final viewState = viewNotifier().watch(context);
 
         return Scaffold(
             appBar: AppBar(title: Text('State Management Experiment')),
@@ -59,7 +59,7 @@ class MyView extends StatelessWidget {
                 ),
             ),
             floatingActionButton: FloatingActionButton(
-                onPressed: () => viewNotifier.instance.fetchData(),
+                onPressed: () => viewNotifier().fetchData(),
                 child: Icon(Icons.refresh),
             ),
         );

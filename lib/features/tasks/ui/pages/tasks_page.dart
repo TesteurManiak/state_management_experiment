@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:state_management/state_management.dart';
 import 'package:state_management_experiment/core/mixins/hook.dart';
 
 import '../notifiers/tasks_notifier.dart';
 import '../widgets/task_list.dart';
+
+final tasksNotifier = NotifierLocator(TasksNotifier.new, autodispose: true);
 
 class TasksPage extends StatefulWidget {
   const TasksPage({super.key});
@@ -12,8 +15,6 @@ class TasksPage extends StatefulWidget {
 }
 
 class _TasksPageState extends State<TasksPage> with HookMixin {
-  late final notifier = useNotifier(TasksNotifier());
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -28,7 +29,7 @@ class _TasksPageState extends State<TasksPage> with HookMixin {
             ],
           ),
         ),
-        body: TaskList(notifier: notifier),
+        body: TaskList(),
       ),
     );
   }
