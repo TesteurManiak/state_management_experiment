@@ -8,7 +8,7 @@ void main() {
     group('autodispose = true', () {
       void emptyListener() {}
 
-      test('should call dispose when there is no more listeners', () {
+      test('should call dispose when there is no more listeners', () async {
         final locator = NotifierLocator(_TestNotifier.new, autodispose: true);
         final notifier = locator.instance;
 
@@ -17,15 +17,20 @@ void main() {
         notifier.addListener(emptyListener);
         notifier.removeListener(emptyListener);
 
+        // Autodispose is deferred to a microtask to avoid disposing on a
+        // transient zero-listener moment (see UnsubscribeNotifier).
+        await Future<void>.value();
+
         expect(notifier.disposed, isTrue);
       });
 
-      test('should create a new notifier after disposal', () {
+      test('should create a new notifier after disposal', () async {
         final locator = NotifierLocator(_TestNotifier.new, autodispose: true);
         final notifierA = locator.instance;
 
         notifierA.addListener(emptyListener);
         notifierA.removeListener(emptyListener);
+        await Future<void>.value();
 
         final notifierB = locator.instance;
         expect(notifierB.disposed, isFalse);

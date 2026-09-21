@@ -1,8 +1,7 @@
-import 'dart:ui' show VoidCallback;
-
 import 'package:meta/meta.dart';
 
 typedef LocatorCreate<T> = T Function();
+typedef VoidCallback = void Function();
 
 /// A service locator that lazily creates an instance of a type [T], accessible
 /// through the singleton [instance] getter.
