@@ -10,6 +10,24 @@ You can use the `Locator` class to register and retrieve singleton instances of 
 final repositoryLocator = Locator<MyRepository>(MyRepositoryImpl.new);
 ```
 
+### Registering asynchronously initialized dependencies
+
+`Locator` only creates instances synchronously. For a dependency that requires
+an `await` to initialize (e.g. `SharedPreferences`), resolve it once before
+`runApp` and assign it to a `late final` locator so the rest of the app can
+still access it synchronously:
+
+```dart
+late final Locator<SharedPreferences> sharedPreferencesLocator;
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final prefs = await SharedPreferences.getInstance();
+  sharedPreferencesLocator = Locator(() => prefs);
+  runApp(const MyApp());
+}
+```
+
 ## State Management Concepts
 
 ### 1. Create a State

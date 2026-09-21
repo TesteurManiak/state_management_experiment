@@ -9,7 +9,7 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeMode = themeNotifier.instance.watch(context);
+    final themeMode = themeNotifier().watch(context);
     return MaterialApp(
       themeMode: themeMode,
       theme: ThemeData.light(),
