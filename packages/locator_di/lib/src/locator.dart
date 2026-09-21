@@ -1,4 +1,6 @@
-import 'package:flutter/foundation.dart';
+import 'dart:ui' show VoidCallback;
+
+import 'package:meta/meta.dart';
 
 typedef LocatorCreate<T> = T Function();
 

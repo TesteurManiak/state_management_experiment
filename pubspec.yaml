@@ -8,6 +8,7 @@ environment:
   flutter: ">=3.38.0"
 
 workspace:
+  - packages/locator_di
   - packages/state_management
 
 dependencies:
@@ -17,6 +18,8 @@ dependencies:
   shared_preferences: ^2.5.5
   state_management:
     path: packages/state_management
+  locator_di:
+    path: packages/locator_di
 
 dev_dependencies:
   build_runner: ^2.16.1

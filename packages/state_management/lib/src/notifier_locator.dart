@@ -1,4 +1,5 @@
-import 'locator.dart';
+import 'package:locator_di/locator_di.dart';
+
 import 'mixins/unsubscribe_notifier.dart';
 
 /// A specialized [Locator] for managing instances of unsubscribable notifiers.
