@@ -37,6 +37,10 @@ class Locator<T> {
     }
   }
 
+  /// Shorthand for [instance], e.g. `themeNotifier()` instead of
+  /// `themeNotifier.instance`.
+  T call() => instance;
+
   /// Disposes the current instance of the locator.
   ///
   /// Calls the [onDispose] callback if provided and sets the instance to null.
