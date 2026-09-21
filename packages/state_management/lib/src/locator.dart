@@ -6,7 +6,7 @@ typedef LocatorCreate<T> = T Function();
 /// through the singleton [instance] getter.
 ///
 /// You can provide an optional [onDispose] callback that will be called
-/// when the locator is invalidated using the [invalidate] method.
+/// when the locator is invalidated using the [dispose] method.
 ///
 /// It can be overridden for testing purposes using the
 /// [overrideWith] and [overrideWithValue] methods.
