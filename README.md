@@ -1,12 +1,6 @@
-<p align="center">
-  <img width="500" src="https://github.com/TesteurManiak/state_management_experiment/blob/main/images/banner.jpg?raw=true">
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/license-MIT-purple">
-</p>
-
 # state_management_experiment
+
+[![License: MIT](https://img.shields.io/badge/license-MIT-purple)](LICENSE)
 
 An experimentation in implementing state management concepts in Flutter without using any external packages.
 

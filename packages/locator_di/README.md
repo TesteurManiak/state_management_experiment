@@ -1,3 +1,7 @@
+<p align="center">
+  <img width="500" src="https://github.com/TesteurManiak/state_management_experiment/blob/main/images/banner.jpg?raw=true">
+</p>
+
 # locator_di
 
 An experimentation in implementing simple dependency injection in Dart without using any external packages.
