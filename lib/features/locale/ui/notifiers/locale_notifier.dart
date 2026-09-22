@@ -6,9 +6,12 @@ import 'package:state_management/state_management.dart';
 final defaultLocale = Locator<Locale>(() => PlatformDispatcher.instance.locale);
 
 class LocaleNotifier extends Notifier<Locale> {
-  new() : super(defaultLocale());
+  new(super.initialValue);
 
   void setLocale(Locale locale) => state = locale;
 }
 
-final localeNotifier = NotifierLocator(() => LocaleNotifier());
+final localeNotifier = NotifierLocator(() {
+  final initialValue = defaultLocale();
+  return LocaleNotifier(initialValue);
+});
