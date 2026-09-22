@@ -57,6 +57,7 @@ class Locator<T>(
   void dispose() {
     onDispose?.call();
     _instance = null;
+    _override = null;
   }
 
   /// Overrides the current instance of the locator with the provided [create]
