@@ -10,11 +10,12 @@ class ThemeModeNotifier extends Notifier<ThemeMode> {
 
   void toggle() {
     final platformBrightness = PlatformDispatcher.instance.platformBrightness;
-    state = switch (state) {
+    final ThemeMode newMode = switch (state) {
       .system => platformBrightness == .light ? .dark : .light,
       .light => .dark,
       .dark => .light,
     };
+    state = newMode;
   }
 }
 

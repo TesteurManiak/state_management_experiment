@@ -9,7 +9,7 @@ class ThemeSwitcher extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final darkModeNotifier = themeNotifier().select(
-      (s) => s.toBrightness() == Brightness.dark,
+      (s) => s.toBrightness() == .dark,
     );
 
     return ValueListenableBuilder<bool>(
