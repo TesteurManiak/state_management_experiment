@@ -28,6 +28,6 @@ migrate_working_dir/
 .dart_tool/
 .flutter-plugins-dependencies
 /build/
-/coverage/
+/coverage/*
 !/coverage/badges/
 !/coverage/badges/*.svg
