@@ -4,6 +4,8 @@
 
 # locator_di
 
+![coverage](https://raw.githubusercontent.com/TesteurManiak/state_management_experiment/main/packages/locator_di/coverage/badges/coverage.svg)
+
 An experimentation in implementing simple dependency injection in Dart without using any external packages.
 
 ## Dependency Injection

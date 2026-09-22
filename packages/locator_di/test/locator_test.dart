@@ -85,6 +85,17 @@ void main() {
       expect(identical(locator.instance, original), isFalse);
     });
 
+    test('mounted reflects whether an instance is active', () {
+      final locator = Locator<_Service>(_Service.new);
+      expect(locator.mounted, isFalse);
+
+      locator.instance;
+      expect(locator.mounted, isTrue);
+
+      locator.dispose();
+      expect(locator.mounted, isFalse);
+    });
+
     test('call() is shorthand for instance', () {
       final locator = Locator<_Service>(_Service.new);
       expect(identical(locator(), locator.instance), isTrue);

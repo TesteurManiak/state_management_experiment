@@ -1,0 +1,60 @@
+name: locator_di tests
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "packages/locator_di/**"
+      - ".github/workflows/locator_di_test.yml"
+  pull_request:
+    paths:
+      - "packages/locator_di/**"
+      - ".github/workflows/locator_di_test.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - run: flutter pub get
+
+      - run: >
+          flutter test packages/locator_di/test
+          --coverage
+          --coverage-path=packages/locator_di/coverage/lcov.info
+
+      - name: Install lcov
+        run: sudo apt-get update && sudo apt-get install -y lcov
+
+      - name: Extract coverage percentage
+        id: coverage
+        run: |
+          PCT=$(lcov --summary packages/locator_di/coverage/lcov.info 2>&1 | grep -E 'lines\.+:' | grep -oE '[0-9]+\.[0-9]+')
+          echo "{\"total\":{\"lines\":{\"pct\":$PCT}}}" > packages/locator_di/coverage/coverage-summary.json
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Generate coverage badge
+        run: >
+          npx --yes coverage-badges-cli
+          --source packages/locator_di/coverage/coverage-summary.json
+          --output packages/locator_di/coverage/badges/coverage.svg
+          --jsonPath total.lines.pct
+          --label coverage
+
+      - name: Commit badge
+        if: github.event_name == 'push'
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: update locator_di coverage badge"
+          file_pattern: packages/locator_di/coverage/badges/coverage.svg
