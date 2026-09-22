@@ -35,6 +35,12 @@ class Locator<T>(
     }
   }
 
+  /// Returns `true` if the locator has an active instance, `false` otherwise.
+  ///
+  /// This won't create a new instance; it only checks if an instance is
+  /// currently active.
+  bool get mounted => _instance != null;
+
   /// Shorthand for [instance], e.g. `themeNotifier()` instead of
   /// `themeNotifier.instance`.
   T call() => instance;
