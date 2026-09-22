@@ -11,13 +11,10 @@ typedef VoidCallback = void Function();
 ///
 /// It can be overridden for testing purposes using the
 /// [overrideWith] and [overrideWithValue] methods.
-class Locator<T> {
-  /// Creates a locator with the provided [create] function.
-  Locator(this._create, {this.onDispose});
-
-  final LocatorCreate<T> _create;
-  final VoidCallback? onDispose;
-
+class Locator<T>(
+  final LocatorCreate<T> _create, {
+  final VoidCallback? onDispose,
+}) {
   LocatorCreate<T>? _override;
 
   T? _instance;
@@ -60,8 +57,8 @@ class Locator<T> {
   /// function.
   ///
   /// {@template locator.override_warning}
-  /// **Warning:** This method does not perform any disposal of the existing
-  /// instance. Make sure to call [dispose] before overriding if necessary.
+  /// **Warning:** This method clears the current instance but does not call
+  /// [dispose]. Make sure to call [dispose] before overriding if necessary.
   /// {@endtemplate}
   @visibleForTesting
   void overrideWith(LocatorCreate<T> create) {
